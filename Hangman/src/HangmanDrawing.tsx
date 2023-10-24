@@ -73,16 +73,18 @@ const LeftLeg = (
     }}/>
 )
 
-export default function HangmanDrawing(){return(
+const Body_Parts = [Head,Body,RightArm,LeftArm,RightLeg,LeftLeg]
+
+type HangmanDrawingProps={
+    numberofGuesses : number
+}
+
+export default function HangmanDrawing({numberofGuesses}:HangmanDrawingProps){return(
 <div style={{
     position:"relative"
 }}>
-    {Head}
-    {Body}
-    {RightArm}
-    {LeftArm}
-    {RightLeg}
-    {LeftLeg}
+    
+    {Body_Parts.slice(0,numberofGuesses)}
 
     <div style={{ height:"50px", width:"10px", background:"black", top:0, right:0, position:"absolute"}}/>
     {/* Soporte vertical */}
