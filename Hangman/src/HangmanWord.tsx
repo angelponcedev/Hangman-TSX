@@ -17,7 +17,7 @@ export default function HangmanWord({guessedLetters,wordtoGuess}:HangmanWordProp
     }}>
 
     {wordtoGuess.split("").map( (letter,index) => (
-    <span style={{ borderBottom:".1em solidblack" }} key={index}>
+    <span style={{ borderBottom:".1em solid black"}} key={index}>
         <span style={{ visibility:guessedLetters.includes(letter) 
                         ? "visible"
                         : "visible"}}>

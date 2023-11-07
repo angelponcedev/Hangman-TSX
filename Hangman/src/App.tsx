@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback} from "react";
 import { useState } from "react";
 import HangmanDrawing from "./HangmanDrawing"
 import HangmanWord from "./HangmanWord"
@@ -20,9 +20,12 @@ function App() {
   console.log(wordToGuess)
 
   {/* Logica para conectar teclas*/}
-      function addGuessedLetter(letter : string){
-        
-      }
+      const addGuessedLetter = useCallback(
+        (letter:string)  => {
+          if(guessedLetters.includes(letter))  return
+          setGuessedLetters(currentLetters => [...currentLetters,letter])
+        },[guessedLetters]
+      )
 
       useEffect(()=>{
         const handler = (e: KeyboardEvent) => {
@@ -39,7 +42,7 @@ function App() {
         return() => {
         document.removeEventListener("keypress",handler)
         }
-      })
+      },[guessedLetters])
   
   return (
     <div style={{
@@ -60,7 +63,7 @@ function App() {
       <HangmanDrawing numberofGuesses={incorrectLetters.length}/>
       <HangmanWord guessedLetters={guessedLetters} wordtoGuess={wordToGuess}/>
       <div style={{alignSelf:"stretch"}}>
-        <Keyboard/>
+            <Keyboard/>
       </div>
     </div>
   )
