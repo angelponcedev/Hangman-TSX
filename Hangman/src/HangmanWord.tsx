@@ -20,7 +20,7 @@ export default function HangmanWord({guessedLetters,wordtoGuess}:HangmanWordProp
     <span style={{ borderBottom:".1em solid black"}} key={index}>
         <span style={{ visibility:guessedLetters.includes(letter) 
                         ? "visible"
-                        : "visible"}}>
+                        : "hidden"}}>
                 {letter}
         </span>
     </span>

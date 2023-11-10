@@ -43,6 +43,12 @@ function App() {
         document.removeEventListener("keypress",handler)
         }
       },[guessedLetters])
+
+      //Logica para determinar si gano o perdio
+      const isLoser = incorrectLetters.length >= 6
+      const isWinner = wordToGuess.split("").every(letter => 
+                       guessedLetters.includes(letter))
+
   
   return (
     <div style={{
@@ -57,13 +63,19 @@ function App() {
         fontSize: "2rem",
         textAlign: "center"
       }}>
-        Win or Lose
+        {isWinner && "Has ganado! - Recarga para jugar de Nuevo!"}
+        {isLoser && "Buen intento - Recarga para jugar de Nuevo!"}
       </div>
 
       <HangmanDrawing numberofGuesses={incorrectLetters.length}/>
       <HangmanWord guessedLetters={guessedLetters} wordtoGuess={wordToGuess}/>
       <div style={{alignSelf:"stretch"}}>
-            <Keyboard/>
+            <Keyboard  
+            activeLetters={guessedLetters.filter(letter =>
+              wordToGuess.includes(letter)
+            )}
+            inactiveLetters = {incorrectLetters}
+            addGuessedLetter  = {addGuessedLetter}/>
       </div>
     </div>
   )
